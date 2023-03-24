@@ -1,0 +1,23 @@
+import java.util.Scanner;
+public class Skipping 
+{
+public static void main(String[] args) {
+	int a,b,c,i,k,j;
+	Scanner sc = new Scanner(System.in);
+	System.out.print("A- ");
+	a=sc.nextInt();
+	System.out.print("B- ");
+	b=sc.nextInt();
+	System.out.print("B- ");
+	k=sc.nextInt();
+
+	System.out.println("Composite numbers are-");
+	for (i=a;i<b;i=i+k)
+	{
+		System.out.println(i);	
+		
+	}
+
+
+}
+}
