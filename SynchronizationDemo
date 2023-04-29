@@ -1,0 +1,41 @@
+import java.util.Scanner;
+class Customer {
+    private int accountNo;
+    private String accName;
+    private int balance;
+
+    public Customer(int accountNo, String accName, int balance) {
+        this.accountNo = accountNo;
+        this.accName = accName;
+        this.balance = balance;
+    }
+
+    public synchronized void deposit(int amount) {
+        balance += amount;
+        System.out.println("Deposit of " + amount + " successful. New balance is " + balance);
+        notify();
+    }
+
+    public synchronized void withdraw(int amount) {
+        if (balance < amount) {
+            System.out.println("Insufficient balance. Please deposit to continue.");
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        balance -= amount;
+        System.out.println("Withdrawal of " + amount + " successful. New balance is " + balance);
+    }
+}
+
+public class SynchronizationDemo {
+    public static void main(String[] args) {
+        Customer customer = new Customer(123456, "KALYAN", 1000);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the amount to withdraw: ");
+        int amount = scanner.nextInt();
+        customer.withdraw(amount);
+    }
+}
